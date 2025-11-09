@@ -8,6 +8,8 @@ void Application::setup(bool& isRunningPtr)
 
 	// Create window
 	windowClass.CreateWindow();
+
+	rendererClass.setup();
 }
 
 void Application::update()
@@ -15,6 +17,9 @@ void Application::update()
 	// Check for press on X to quit application
 	if (glfwWindowShouldClose(windowClass.window))
 		*isRunning = false;
+
+	// Render loop
+	rendererClass.update();
 
 	// Swap the windows buffers
 	glfwSwapBuffers(windowClass.window);
@@ -24,5 +29,5 @@ void Application::update()
 
 void Application::end()
 {
-
+	rendererClass.end();
 }

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "renderer/window.h"
+#include "renderer/renderer.h"
 
 #include "GLFW/glfw3.h"
 
@@ -13,6 +14,7 @@ private:
 
 	// Classes
 	Window windowClass;
+	Renderer rendererClass;
 
 public:
 
