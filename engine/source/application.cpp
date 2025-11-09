@@ -10,13 +10,20 @@ void Application::setup(bool& isRunningPtr)
 	windowClass.CreateWindow();
 
 	rendererClass.setup();
+	playerClass.setup(rendererClass, *windowClass.window);
 }
 
 void Application::update()
 {
+	// Get deltaTime
+	deltaTime = glfwGetTime() - timePrev;
+	timePrev = glfwGetTime();
+
 	// Check for press on X to quit application
-	if (glfwWindowShouldClose(windowClass.window))
+	if (glfwWindowShouldClose(windowClass.window) or glfwGetKey(windowClass.window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
 		*isRunning = false;
+
+	playerClass.update(deltaTime);
 
 	// Render loop
 	rendererClass.update();

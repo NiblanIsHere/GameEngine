@@ -23,6 +23,6 @@ unsigned int Texture::LoadTexture(const char* texturePath)
         std::cout << "Failed to load texture" << std::endl;
     }
     stbi_image_free(data);
-
+    
 	return 0;
 }

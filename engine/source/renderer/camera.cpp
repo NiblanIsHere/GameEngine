@@ -15,6 +15,8 @@ void Camera::SetMatrices(unsigned int shaderProgram)
 
 	cameraFront = glm::normalize(cameraFront);
 
+	position.z = 0 - position.z;
+
 	glm::vec3 cameraTarget = position + cameraFront;
 	glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f);
 
@@ -27,4 +29,30 @@ void Camera::SetMatrices(unsigned int shaderProgram)
 
 	int projectionLoc = glGetUniformLocation(shaderProgram, "projection");
 	glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(projection));
+
+	position.z = 0 - position.z;
+}
+
+vec3 Camera::GetForwardVector()
+{
+	float yaw = radians(rotation.x);
+	float pitch = radians(0 - rotation.y);
+
+	return vec3(
+		cos(pitch) * sin(yaw),
+	   -sin(pitch),
+		cos(pitch) * cos(yaw)
+	);
+}
+
+vec3 Camera::GetRightVector()
+{
+	float yaw = radians(rotation.x);
+	float pitch = radians(0 - rotation.y);
+
+	return vec3(
+		cos(yaw),
+		0,
+	   -sin(yaw)
+	);
 }

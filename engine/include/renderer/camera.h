@@ -10,14 +10,17 @@ class Camera
 {
 private:
 
-	vec3 position = vec3(0, 0, 1);
-	vec2 rotation = vec2(0, 0);
-	float fov = 90;
-	float nearPlane = 0.1;
+	float nearPlane = 0.01;
 	float farPlane = 100;
 
 public:
 
+	vec3 position = vec3(0, 0, 1);
+	vec2 rotation = vec2(0, 0);
+	float fov = 90;
+
 	void SetMatrices(unsigned int shaderProgram);
+	vec3 GetForwardVector();
+	vec3 GetRightVector();
 
 };

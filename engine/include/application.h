@@ -2,6 +2,7 @@
 
 #include "renderer/window.h"
 #include "renderer/renderer.h"
+#include "player.h"
 
 #include "GLFW/glfw3.h"
 
@@ -15,6 +16,10 @@ private:
 	// Classes
 	Window windowClass;
 	Renderer rendererClass;
+	Player playerClass;
+
+	double timePrev = 0;
+	double deltaTime = 0;
 
 public:
 

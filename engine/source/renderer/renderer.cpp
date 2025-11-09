@@ -3,6 +3,8 @@
 
 void Renderer::setup()
 {
+	textureClass.LoadTexture("resources/textures/test.png");
+
 	test_BufferObjects.CreateBufferObjects(testVertices, testIndices);
 	test_Shader.CreateShaderProgram("basic.vert", "basic.frag");
 }
