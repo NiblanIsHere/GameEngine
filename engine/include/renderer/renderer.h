@@ -3,6 +3,8 @@
 #include "renderer/shader/shader.h"
 #include "renderer/shader/buffer_objects.h"
 #include "renderer/texture.h"
+#include "renderer/mesh/mesh_manager.h"
+#include "renderer/mesh/mesh.h"
 #include "renderer/camera.h"
 
 #include "glad/glad.h"
@@ -22,11 +24,12 @@ private:
 
 public:
 
-	Texture textureClass;
+	MeshManager* meshManagerClass;
 
+	Texture textureClass;
 	Camera cameraClass;
 
-	void setup();
+	void setup(MeshManager& meshManagerClassPtr);
 	void update();
 	void end();
 

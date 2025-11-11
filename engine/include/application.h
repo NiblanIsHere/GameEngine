@@ -2,10 +2,13 @@
 
 #include "renderer/window.h"
 #include "renderer/renderer.h"
+#include "renderer/mesh/mesh_manager.h"
 #include "player.h"
 
 #include "GLFW/glfw3.h"
+#include "glad/glad.h"
 
+#include <vector>
 
 class Application
 {
@@ -16,8 +19,10 @@ private:
 	// Classes
 	Window windowClass;
 	Renderer rendererClass;
+	MeshManager meshManagerClass;
 	Player playerClass;
 
+	// Time variables
 	double timePrev = 0;
 	double deltaTime = 0;
 
