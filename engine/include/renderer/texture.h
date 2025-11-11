@@ -17,8 +17,14 @@ private:
 
 public:
 
+	enum
+	{
+		NEAREST,
+		LINEAR
+	};
+
 	unsigned int texture;
 
-	GLuint LoadTexture(const char* texturePath);
+	GLuint LoadTexture(int textureFilter, const char* texturePath);
 
 };
