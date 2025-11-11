@@ -2,7 +2,7 @@
 
 
 
-void BufferObjects::CreateBufferObjects(const std::vector<float>& vertices, const std::vector<unsigned int>& indices)
+void BufferObjects::CreateBufferObjects(std::vector <float> vertices, std::vector <unsigned int> indices)
 {
 	glGenVertexArrays(1, &VAO);
 	glGenBuffers(1, &VBO);
@@ -10,6 +10,7 @@ void BufferObjects::CreateBufferObjects(const std::vector<float>& vertices, cons
 
 	glBindVertexArray(VAO);
 
+	// Send Mesh data to the shader
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(float), vertices.data(), GL_DYNAMIC_DRAW);
 

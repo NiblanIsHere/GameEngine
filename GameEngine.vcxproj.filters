@@ -39,6 +39,18 @@
     <ClCompile Include="engine\source\renderer\camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="game\source\player.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\source\renderer\texture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\source\renderer\mesh\mesh.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\source\renderer\mesh\mesh_manager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="engine\include\application.h">
@@ -56,10 +68,22 @@
     <ClInclude Include="engine\include\renderer\shader\shader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="engine\include\renderer\camera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game\include\player.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\include\renderer\texture.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="libraries\include\stb\stb_image.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="engine\include\renderer\camera.h">
+    <ClInclude Include="engine\include\renderer\mesh\mesh.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\include\renderer\mesh\mesh_manager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
