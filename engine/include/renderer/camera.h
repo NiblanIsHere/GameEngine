@@ -11,11 +11,11 @@ class Camera
 private:
 
 	float nearPlane = 0.01;
-	float farPlane = 100;
+	float farPlane = 2500;
 
 public:
 
-	vec3 position = vec3(0, 0, 1);
+	vec3 position = vec3(0, 0, 0);
 	vec2 rotation = vec2(0, 0);
 	float fov = 90;
 

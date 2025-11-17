@@ -3,12 +3,14 @@
 #include "renderer/window.h"
 #include "renderer/renderer.h"
 #include "renderer/mesh/mesh_manager.h"
+#include "renderer/mesh/obj_loader.h"
 #include "player.h"
 
 #include "GLFW/glfw3.h"
 #include "glad/glad.h"
 
 #include <vector>
+#include <string>
 
 class Application
 {
@@ -20,6 +22,7 @@ private:
 	Window windowClass;
 	Renderer rendererClass;
 	MeshManager meshManagerClass;
+	objLoader objLoaderClass;
 	Player playerClass;
 
 	// Time variables

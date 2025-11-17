@@ -9,21 +9,20 @@ void Application::setup(bool& isRunningPtr)
 	// Create window
 	windowClass.CreateWindow();
 
-	// Meshes (NOT FINAL!) i need to add a obj loader for this.
-	std::vector <float> va {-0.5,-0.5,0,0,0, 0.5,-0.5,0,1,0, 0,0.5,0,0.5,1};
-	std::vector <unsigned int> ia {0,1,2};
-	std::vector <float> vb{-0.5,-0.5,0,0,0, 0.5,-0.5,0,1,0, -0.5,0.5,0,0,1, 0.5,0.5,0,1,1};
-	std::vector <unsigned int> ib{0,1,2,3,2,1};
+	// I will move this to a level loader later on
+	objLoaderClass.LoadModel("resources/models/testScene.obj");
+	meshManagerClass.AddMesh(objLoaderClass.vertices, objLoaderClass.indices, "testScene");
+	objLoaderClass.LoadModel("resources/models/skyBox.obj");
+	meshManagerClass.AddMesh(objLoaderClass.vertices, objLoaderClass.indices, "skyBox");
+	objLoaderClass.LoadModel("resources/models/backpack.obj");
+	meshManagerClass.AddMesh(objLoaderClass.vertices, objLoaderClass.indices, "backpack");
+	int sceneMesh = meshManagerClass.AddMeshObject("testScene", 1);
+	int headMesh = meshManagerClass.AddMeshObject("skyBox", 2);
+	int backpackMesh = meshManagerClass.AddMeshObject("backpack", 3);
+	meshManagerClass.meshObjects[headMesh].scale = vec3(1000, 1000, 1000);
+	meshManagerClass.meshObjects[backpackMesh].position = vec3(0, 2, 0);
+	meshManagerClass.meshObjects[backpackMesh].scale = vec3(0.5, 0.5, 0.5);
 
-	meshManagerClass.AddMesh(va, ia, "tri");
-	meshManagerClass.AddMesh(vb, ib, "quad");
-
-	meshManagerClass.AddMeshObject("quad", 2);
-	meshManagerClass.AddMeshObject("quad", 3);
-	meshManagerClass.meshObjects[1].position = vec3(0, -0.5, 0);
-	meshManagerClass.meshObjects[1].rotation = vec3(90, 0, 0);
-	meshManagerClass.meshObjects[1].scale = vec3(5, 5, 5);
-	// -------------------
 
 	// Setup classes
 	rendererClass.setup(meshManagerClass);

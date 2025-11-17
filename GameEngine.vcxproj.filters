@@ -51,6 +51,9 @@
     <ClCompile Include="engine\source\renderer\mesh\mesh_manager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="engine\source\renderer\mesh\obj_loader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="engine\include\application.h">
@@ -84,6 +87,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="engine\include\renderer\mesh\mesh_manager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\include\renderer\mesh\obj_loader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

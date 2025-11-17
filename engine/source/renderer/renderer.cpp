@@ -7,16 +7,18 @@ void Renderer::setup(MeshManager& meshManagerClassPtr)
 	meshManagerClass = &meshManagerClassPtr;
 
 	// Load textures
-	textureClass.LoadTexture(textureClass.LINEAR, "resources/textures/bwaaa.png");
-	textureClass.LoadTexture(textureClass.NEAREST, "resources/textures/gun_item.png");
-	textureClass.LoadTexture(textureClass.LINEAR, "resources/textures/grass.png");
-	
+	textureClass.LoadTexture(textureClass.LINEAR, "resources/textures/testScene.png");
+	textureClass.LoadTexture(textureClass.LINEAR, "resources/textures/skyBox.png");
+	textureClass.LoadTexture(textureClass.LINEAR, "resources/textures/backpack.jpg");
+
 	// Setup Shaders
 	test_BufferObjects.CreateBufferObjects(testVertices, testIndices);
 	test_Shader.CreateShaderProgram("basic.vert", "basic.frag");
 
 	// Enable the Z-Buffer
 	glEnable(GL_DEPTH_TEST);
+	// Back Face Culling
+	glEnable(GL_CULL_FACE);
 }
 
 void Renderer::update()

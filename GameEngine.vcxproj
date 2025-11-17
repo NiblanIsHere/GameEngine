@@ -137,6 +137,7 @@
     <ClCompile Include="engine\source\renderer\camera.cpp" />
     <ClCompile Include="engine\source\renderer\mesh\mesh.cpp" />
     <ClCompile Include="engine\source\renderer\mesh\mesh_manager.cpp" />
+    <ClCompile Include="engine\source\renderer\mesh\obj_loader.cpp" />
     <ClCompile Include="engine\source\renderer\renderer.cpp" />
     <ClCompile Include="engine\source\renderer\shader\buffer_objects.cpp" />
     <ClCompile Include="engine\source\renderer\shader\shader.cpp" />
@@ -151,6 +152,7 @@
     <ClInclude Include="engine\include\renderer\camera.h" />
     <ClInclude Include="engine\include\renderer\mesh\mesh.h" />
     <ClInclude Include="engine\include\renderer\mesh\mesh_manager.h" />
+    <ClInclude Include="engine\include\renderer\mesh\obj_loader.h" />
     <ClInclude Include="engine\include\renderer\renderer.h" />
     <ClInclude Include="engine\include\renderer\shader\buffer_objects.h" />
     <ClInclude Include="engine\include\renderer\shader\shader.h" />

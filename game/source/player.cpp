@@ -7,48 +7,91 @@ void Player::setup(Renderer& rendererClassPtr, MeshManager& meshManagerClassPtr,
 	meshManagerClass = &meshManagerClassPtr;
 
 	window = &windowRef;
-
-	// Create player mesh
-	mesh = meshManagerClass->AddMeshObject("tri", 1);
-	meshManagerClass->meshObjects[mesh].scale = vec3(0.5,1,1);
 }
 
 void Player::update(double deltaTime)
 {
-	if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
-		rotation.y += sensitivity * deltaTime;
-	if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
-		rotation.y -= sensitivity * deltaTime;
-	if (glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS)
-		rotation.x += sensitivity * deltaTime;
-	if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS)
-		rotation.x -= sensitivity * deltaTime;
+	// Player Rotation
+	// ---------------
 
-	float yaw = radians(rotation.x);
+	static double lastMouseX = 0.0;
+	static double lastMouseY = 0.0;
+	static bool firstMouse = true;
+	static bool mouseMode = false;
+	static float sensMultiplier = 0.1;
+
+	if (glfwRawMouseMotionSupported()) {
+		glfwSetInputMode(window, GLFW_RAW_MOUSE_MOTION, GLFW_TRUE);
+	}
+	
+	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+
+	// Get current mouse position
+	double mouseX, mouseY;
+	glfwGetCursorPos(window, &mouseX, &mouseY);
+
+	if (firstMouse)
+	{
+		lastMouseX = mouseX;
+		lastMouseY = mouseY;
+		firstMouse = false;
+	}
+
+	// Calculate offset
+	double offsetX = mouseX - lastMouseX;
+	double offsetY = lastMouseY - mouseY;
+
+	// Update last mouse position
+	lastMouseX = mouseX;
+	lastMouseY = mouseY;
+	// Apply sensitivity
+	offsetX *= sensitivity * sensMultiplier;
+	offsetY *= sensitivity * sensMultiplier;
+	// Apply rotation
+	rotation.x += static_cast<float>(offsetX);
+	rotation.y += static_cast<float>(offsetY);
+
+	// Clamp pitch
+	if (rotation.y > 89.9f)
+		rotation.y = 89.9f;
+	if (rotation.y < -89.9f)
+		rotation.y = -89.9f;
+	// Clamp Yaw
+	if (rotation.x > 180)
+		rotation.x -= 360;
+	if (rotation.x < -180)
+		rotation.x += 360;
+
+	// Player Movement
+	// ---------------
+	float yaw = radians(0-rotation.x);
 	float pitch = radians(rotation.y);
 
 	vec3 forward = vec3(sin(yaw), 0, cos(yaw));
+	vec3 right = vec3(cos(yaw), 0, -sin(yaw));
+	vec3 inputDir = vec3(0);
 
+	// Movement inputs
 	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-		position += moveSpeed * forward * vec3(deltaTime);
+		inputDir += forward;
 	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-		position -= moveSpeed * forward * vec3(deltaTime);
-	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-		position += moveSpeed * rendererClass->cameraClass.GetRightVector() * vec3(deltaTime);
+		inputDir -= forward;
 	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-		position -= moveSpeed * rendererClass->cameraClass.GetRightVector() * vec3(deltaTime);
+		inputDir += right;
+	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+		inputDir -= right;
 	if (glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS)
-		position += moveSpeed * vec3(0,1,0) * vec3(deltaTime);
+		inputDir += vec3(0,1,0);
 	if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS)
-		position -= moveSpeed * vec3(0,1,0) * vec3(deltaTime);
+		inputDir -= vec3(0,1,0);
 
+	// Normalize inputDir and play walk animation
+	if (inputDir != vec3(0))
+		inputDir = normalize(inputDir);
 
-	meshManagerClass->meshObjects[mesh].position.x = position.x;
-	meshManagerClass->meshObjects[mesh].position.y = position.y;
-	meshManagerClass->meshObjects[mesh].position.z = 0-position.z;
-	meshManagerClass->meshObjects[mesh].rotation = vec3(0, 0-rendererClass->cameraClass.rotation.x, 0);
+	// Apply player movement to position
+	position += inputDir * moveSpeed * vec3(deltaTime);
 
-	// I will change this to use a rotation matrix, but for the time, i will use the camera forward vector.
-	rendererClass->cameraClass.position = position - rendererClass->cameraClass.GetForwardVector()*vec3(2);
+	rendererClass->cameraClass.position = position + vec3(0,1.85,0);
 	rendererClass->cameraClass.rotation = rotation;
 }

@@ -7,8 +7,8 @@
 
 struct meshData
 {
-	std::vector <float>* vertices;
-	std::vector <unsigned int>* indices;
+	std::vector <float> vertices;
+	std::vector <unsigned int> indices;
 };
 
 class MeshManager
@@ -22,7 +22,7 @@ public:
 
 	std::vector <Mesh> meshObjects = {};
 
-	void AddMesh(std::vector <float>& vertices, std::vector <unsigned int>& indices, const char* name);
+	void AddMesh(std::vector <float> vertices, std::vector <unsigned int> indices, const char* name);
 	unsigned int AddMeshObject(const char* meshName, unsigned int textureID);
 
 };

@@ -15,9 +15,10 @@ int Window::CreateWindow()
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-
+	
 	// Create window
-	window = glfwCreateWindow(1920/2, 1080/2, "Hello Window!", NULL, NULL);
+	const GLFWvidmode* mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
+	window = glfwCreateWindow(mode->width, mode->height, "Hello Window!", glfwGetPrimaryMonitor(), NULL);
 	// Check for errors
 	if (window == NULL)
 	{
