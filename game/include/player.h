@@ -17,6 +17,9 @@ private:
 
 	GLFWwindow* window;
 
+	unsigned int gunMesh = 0;
+	unsigned int fpsArmsMesh = 0;
+
 	vec3 position = vec3(0, 0,-5);
 	vec2 rotation = vec2(0, 0);
 	vec3 velocity = vec3(0, 0, 0);

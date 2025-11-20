@@ -19,9 +19,6 @@ private:
 	Shader test_Shader;
 	BufferObjects test_BufferObjects;
 
-	std::vector <float> testVertices = {};
-	std::vector <unsigned int> testIndices = {};
-
 public:
 
 	MeshManager* meshManagerClass;

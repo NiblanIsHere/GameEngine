@@ -18,7 +18,7 @@ int Window::CreateWindow()
 	
 	// Create window
 	const GLFWvidmode* mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
-	window = glfwCreateWindow(mode->width, mode->height, "Hello Window!", glfwGetPrimaryMonitor(), NULL);
+	window = glfwCreateWindow(mode->width, mode->height, "Hello Window!", NULL, NULL);
 	// Check for errors
 	if (window == NULL)
 	{

@@ -10,9 +10,11 @@ void Renderer::setup(MeshManager& meshManagerClassPtr)
 	textureClass.LoadTexture(textureClass.LINEAR, "resources/textures/testScene.png");
 	textureClass.LoadTexture(textureClass.LINEAR, "resources/textures/skyBox.png");
 	textureClass.LoadTexture(textureClass.LINEAR, "resources/textures/backpack.jpg");
+	textureClass.LoadTexture(textureClass.LINEAR, "resources/textures/gun.png");
+	textureClass.LoadTexture(textureClass.LINEAR, "resources/textures/fpsArms.png");
 
 	// Setup Shaders
-	test_BufferObjects.CreateBufferObjects(testVertices, testIndices);
+	test_BufferObjects.CreateBufferObjects();
 	test_Shader.CreateShaderProgram("basic.vert", "basic.frag");
 
 	// Enable the Z-Buffer
@@ -33,9 +35,12 @@ void Renderer::update()
 
 	// Use the shader
 	glUseProgram(test_Shader.shaderProgram);
+
+	test_Shader.setFloat("time", glfwGetTime());
 	// Send camera matrices to shader
 	cameraClass.SetMatrices(test_Shader.shaderProgram);
-
+	// Send camera pos
+	test_Shader.setVec3("viewPos", cameraClass.position);
 	// Draw all meshes
 	for (auto mesh : meshManagerClass->meshObjects)
 	{

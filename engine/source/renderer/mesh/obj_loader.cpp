@@ -93,6 +93,10 @@ void objLoader::LoadModel(const char* filePath)
         // Add vertex texCoords
         vertices.push_back(vertexTextureCoords[face.vertex1.y - 1].x);
         vertices.push_back(vertexTextureCoords[face.vertex1.y - 1].y);
+        // Add vertex normals
+        vertices.push_back(vertexNormals[face.vertex1.z - 1].x);
+        vertices.push_back(vertexNormals[face.vertex1.z - 1].y);
+        vertices.push_back(vertexNormals[face.vertex1.z - 1].z);
 
         // Add vertex 2
         // Add vertex pos
@@ -102,6 +106,10 @@ void objLoader::LoadModel(const char* filePath)
         // Add vertex texCoords
         vertices.push_back(vertexTextureCoords[face.vertex2.y - 1].x);
         vertices.push_back(vertexTextureCoords[face.vertex2.y - 1].y);
+        // Add vertex normals
+        vertices.push_back(vertexNormals[face.vertex2.z - 1].x);
+        vertices.push_back(vertexNormals[face.vertex2.z - 1].y);
+        vertices.push_back(vertexNormals[face.vertex2.z - 1].z);
 
         // Add vertex 3
         // Add vertex pos
@@ -111,9 +119,13 @@ void objLoader::LoadModel(const char* filePath)
         // Add vertex texCoords
         vertices.push_back(vertexTextureCoords[face.vertex3.y - 1].x);
         vertices.push_back(vertexTextureCoords[face.vertex3.y - 1].y);
+        // Add vertex normals
+        vertices.push_back(vertexNormals[face.vertex3.z - 1].x);
+        vertices.push_back(vertexNormals[face.vertex3.z - 1].y);
+        vertices.push_back(vertexNormals[face.vertex3.z - 1].z);
 
         // Add indices
-        unsigned int baseIndex = (vertices.size() / 5) - 3;
+        unsigned int baseIndex = (vertices.size() / 8) - 3;
         indices.push_back(baseIndex + 0);
         indices.push_back(baseIndex + 1);
         indices.push_back(baseIndex + 2);

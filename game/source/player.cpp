@@ -7,6 +7,9 @@ void Player::setup(Renderer& rendererClassPtr, MeshManager& meshManagerClassPtr,
 	meshManagerClass = &meshManagerClassPtr;
 
 	window = &windowRef;
+
+	gunMesh = meshManagerClass->AddMeshObject("gun", 4);
+	fpsArmsMesh = meshManagerClass->AddMeshObject("fpsArms", 5);
 }
 
 void Player::update(double deltaTime)
@@ -56,11 +59,6 @@ void Player::update(double deltaTime)
 		rotation.y = 89.9f;
 	if (rotation.y < -89.9f)
 		rotation.y = -89.9f;
-	// Clamp Yaw
-	if (rotation.x > 180)
-		rotation.x -= 360;
-	if (rotation.x < -180)
-		rotation.x += 360;
 
 	// Player Movement
 	// ---------------
@@ -92,6 +90,12 @@ void Player::update(double deltaTime)
 	// Apply player movement to position
 	position += inputDir * moveSpeed * vec3(deltaTime);
 
-	rendererClass->cameraClass.position = position + vec3(0,1.85,0);
+	float meshLag = 100;
+	meshManagerClass->meshObjects[gunMesh].position = position;
+	meshManagerClass->meshObjects[gunMesh].rotation += (vec3(0 - rotation.y, 0 - rotation.x, 0) - meshManagerClass->meshObjects[gunMesh].rotation) / vec3(2) * vec3(deltaTime) * vec3(meshLag);
+	meshManagerClass->meshObjects[fpsArmsMesh].position = position;
+	meshManagerClass->meshObjects[fpsArmsMesh].rotation += (vec3(0 - rotation.y, 0 - rotation.x, 0) - meshManagerClass->meshObjects[fpsArmsMesh].rotation) / vec3(2) * vec3(deltaTime) * vec3(meshLag);
+
+	rendererClass->cameraClass.position = position;
 	rendererClass->cameraClass.rotation = rotation;
 }

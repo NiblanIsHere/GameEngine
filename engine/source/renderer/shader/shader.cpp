@@ -3,15 +3,14 @@
 
 std::string Shader::ReadFile(const char* fileName)
 {
-    // Set shaderCode to be empty
     shaderCode = "";
     std::string line;
     std::ifstream file(shaderFolder + fileName); // Shader file 
     std::cout << shaderFolder + fileName << "\n";
-    // Check if file can be open
+
     if (file.is_open())
     {
-        // Loop throw every line and add the line to shaderCode
+        // Loop through every line and add the line to shaderCode
         while (getline(file, line))
         {
             shaderCode += line + "\n";
@@ -30,7 +29,7 @@ void Shader::CreateShaderProgram(const char* vertexShaderName, const char* fragm
     // Load shader code it to variables
     std::string vertexShaderCode = ReadFile(vertexShaderName);
     std::string fragmentShaderCode = ReadFile(fragmentShaderName);
-    // Convert it to the file source code of chars instead of string so opengl can FUCKING read it
+    // Convert it to the file source code of chars instead of string so opengl can read it
     const char* vertexShaderSource = vertexShaderCode.c_str();
     const char* fragmentShaderSource = fragmentShaderCode.c_str();
 
@@ -90,4 +89,16 @@ void Shader::CreateShaderProgram(const char* vertexShaderName, const char* fragm
     // Delete shader objects
     glDeleteShader(vertexShader);
     glDeleteShader(fragmentShader);
+}
+
+void Shader::setFloat(const char* variableName, float value)
+{
+    unsigned int variableLoc = glGetUniformLocation(shaderProgram, variableName);
+    glUniform1f(variableLoc, value);
+}
+
+void Shader::setVec3(const char* variableName, vec3 value)
+{
+    unsigned int variableLoc = glGetUniformLocation(shaderProgram, variableName);
+    glUniform3f(variableLoc, value.x, value.y, value.z);
 }
